@@ -1,2 +1,2 @@
 # essentials
-essential dot files 
+essential dotfiles 

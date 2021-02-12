@@ -6,9 +6,9 @@
 [[ $- != *i* ]] && return
 
 #Exportlar
-export TERM="alacritty"            
+export TERM="kitty"            
 export HISTCONTROL=ignoredups:erasedups 
-export EDITOR="vim"      
+export EDITOR="nvim"      
 
 #Aliases
 alias ls='ls --color=auto'
@@ -20,6 +20,7 @@ alias rm='rm -I'
 alias cd..='cd ..'
 alias pacmaq="pacman -Qeq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias vim='nvim'
 #Shoptlar
 shopt -s autocd
 

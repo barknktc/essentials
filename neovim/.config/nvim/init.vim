@@ -6,16 +6,20 @@ filetype plugin indent on
 call plug#begin('~/local/share/nvim/plugged')
 
 Plug 'tomasiser/vim-code-dark' "color theme
+"Airline status line
 Plug 'vim-airline/vim-airline' "status line
 Plug 'vim-airline/vim-airline-themes' "status line theme
 Plug 'ryanoasis/vim-devicons' "status line icons
+"Fern file tree
+Plug 'lambdalisue/fern.vim' "file tree
 Plug 'lambdalisue/nerdfont.vim' "icons for fern tree
 Plug 'lambdalisue/fern-renderer-nerdfont.vim' "icons for fern tree
-
+Plug 'lambdalisue/fern-git-status.vim' "git icons for fern
+"Auto Complete
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } "hex color preview
 
 Plug 'antoinemadec/FixCursorHold.nvim'
-Plug 'lambdalisue/fern.vim' "file tree
 Plug 'tpope/vim-surround'
 
 call plug#end()
@@ -29,6 +33,7 @@ call plug#end()
     let g:airline_powerline_fonts = 1
     let g:airline_theme = 'codedark'
     let g:fern#renderer = "nerdfont"
+    command! -nargs=0 Prettier :CocCommand prettier.formatFile
     "}}}
 
 " NAVIGATION-------------------------------------------------------{{{1
@@ -70,10 +75,41 @@ set shada='1000,f1,<500
 let mapleader=" "
 
 nmap <F3> :nohlsearch<CR>
+
+    "NAVIGATE-----------------------------------------------------{{{
+    
+    " use crtl+hjkl to move between split/vsplit panels
+    tnoremap <C-h> <C-\><C-n><C-w>h
+    tnoremap <C-j> <C-\><C-n><C-w>j
+    tnoremap <C-k> <C-\><C-n><C-w>k
+    tnoremap <C-l> <C-\><C-n><C-w>l
+    nnoremap <C-h> <C-w>h
+    nnoremap <C-j> <C-w>j
+    nnoremap <C-k> <C-w>k
+    nnoremap <C-l> <C-w>l
+
+    "}}}
+    "TERMINAL-----------------------------------------------------{{{
+        
+        " open new split panes to right and below
+    set splitright
+    set splitbelow
+    " turn terminal to normal mode with escape
+    tnoremap <Esc> <C-\><C-n>
+    " start terminal in insert mode
+    au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+    " open terminal on ctrl+n
+    function! OpenTerminal()
+      split term://bash
+      resize 10
+    endfunction
+    nnoremap <c-n> :call OpenTerminal()<CR>
+
+    "}}}
     "FERN---------------------------------------------------------{{{
 
     let g:fern#disable_default_mappings = 1
-    noremap <F2> <Esc>:Fern . -drawer -reveal=% -toggle -width=30<CR><C-w>= 
+    noremap <F2> <Esc>:Fern . -drawer -reveal=% -toggle -width=30<CR><C-w>=
     function! FernInit() abort
         nmap <buffer> <CR> <Plug>(fern-my-open-expand-collapse)
         nmap <buffer> l <Plug>(fern-action-expand:stay)
@@ -96,6 +132,7 @@ nmap <F3> :nohlsearch<CR>
       autocmd!
       autocmd FileType fern call FernInit()
     augroup END
+
     "}}}
 
 " OTHER------------------------------------------------------------{{{1

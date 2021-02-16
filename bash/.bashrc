@@ -19,6 +19,7 @@ alias mv='mv -i'
 alias rm='rm -I' 
 alias cd..='cd ..'
 alias pacmaq="pacman -Qeq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
+alias pac='sudo pacman'
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 alias vim='nvim'
 #Shoptlar

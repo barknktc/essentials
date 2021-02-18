@@ -42,7 +42,7 @@ export HISTCONTROL=ignoredups:erasedups
     alias ping='ping -c 5'
     alias vim='nvim'
 
-    }}}
+    # }}}
 
 # SHELL OPTIONS-----------------------------------------------------------{{{1
 

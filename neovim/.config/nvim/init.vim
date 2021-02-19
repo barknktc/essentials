@@ -9,20 +9,28 @@ filetype plugin indent on
 " PLUGINS----------------------------------------------------------{{{1
 call plug#begin('~/local/share/nvim/plugged')
 
-Plug 'tomasiser/vim-code-dark' "color theme
+Plug 'morhetz/gruvbox' "color theme
+
 "Airline status line
 Plug 'vim-airline/vim-airline' "status line
 Plug 'vim-airline/vim-airline-themes' "status line theme
 Plug 'ryanoasis/vim-devicons' "status line icons
+
 "Fern file tree
 Plug 'lambdalisue/fern.vim' "file tree
 Plug 'lambdalisue/nerdfont.vim' "icons for fern tree
 Plug 'lambdalisue/fern-renderer-nerdfont.vim' "icons for fern tree
 Plug 'lambdalisue/fern-git-status.vim' "git icons for fern
-"Auto Complete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } "hex color preview
 
+"Fuzzy Search
+Plug 'junegunn/fzf.vim' "finder
+
+"Auto Complete
+Plug 'neoclide/coc.nvim', {'branch': 'release'} "Auto complete
+
+"Other 
+Plug 'preservim/nerdcommenter' "Comment helper
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } "hex color preview
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'tpope/vim-surround'
 
@@ -30,49 +38,52 @@ call plug#end()
 
     " PLUGIN CONFIG------------------------------------------------{{{
 
-    colorscheme codedark
+    colorscheme gruvbox                 "Setting the colorscheme
+    let g:airline_theme = 'gruvbox'     "Setting the airline theme
+    let g:fern#renderer = "nerdfont"    "Setting the fern icons
+    let g:airline_powerline_fonts = 1   "Setting the airline fonts
+
     if (has("termguicolors"))
      set termguicolors
     endif
-    let g:airline_powerline_fonts = 1
-    let g:airline_theme = 'codedark'
-    let g:fern#renderer = "nerdfont"
+
     command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
     "}}}
 
 " NAVIGATION-------------------------------------------------------{{{1
 
-set number
-set relativenumber
-set incsearch
-set ignorecase smartcase
-set iskeyword&
-set so=8
+set number                  "Show line numbers
+set relativenumber          "Show the line number relative to the cursor
+set incsearch               "Search as you type
+set ignorecase smartcase    "Ignore case until an uppercase letter
+set iskeyword&              "Recognising words
+set scrolloff=8             "Keep cursor away from this many chars top/bot
 
 
 " FORMATTING-AND-LOOKS---------------------------------------------{{{1
 
-syntax on
-set smartindent
-set shiftwidth=4
-set softtabstop=4
-set expandtab
-set nowrap
-set foldcolumn=2
-set cursorline
-set lazyredraw
+syntax on                   "Syntax coloring
+set smartindent             "Indent 'Smartly'
+set shiftwidth=4            "Number of spaces to shift for autoindent or >,<
+set softtabstop=4           "Spaces per psuedo tab 
+set expandtab               "Convert tabs to spaces
+set nowrap                  "Dont wrap the text
+set foldcolumn=1            "The with of the left column about folds
+set cursorline              "Highlighting the line with the cursor
+set lazyredraw              "Dont show keymap action until it finishes
 
 " COMPLETION-------------------------------------------------------{{{1
 
-set wildmode=longest,list
+set wildmode=longest,list   "Show possible completions on command line
 set clipboard+=unnamedplus
-
 
 " BACKUPS----------------------------------------------------------{{{1
 
-set shada='1000,f1,<500
-
-
+set shada='1000,f1,<500     "The history of mark and cursor etc.
+set hidden                  "Don't prompt to save hidden windows until exit
+set nobackup
+set nowritebackup
 
 " KEY MAPPINGS-----------------------------------------------------{{{1
 
@@ -80,7 +91,7 @@ let mapleader=" "
 
 nmap <F3> :nohlsearch<CR>
 
-    "NAVIGATE-----------------------------------------------------{{{
+    "NAVIGATE-----------------------------------------------------{{{2
     
     " use crtl+hjkl to move between split/vsplit panels
     tnoremap <C-h> <C-\><C-n><C-w>h
@@ -92,10 +103,9 @@ nmap <F3> :nohlsearch<CR>
     nnoremap <C-k> <C-w>k
     nnoremap <C-l> <C-w>l
 
-    "}}}
-    "TERMINAL-----------------------------------------------------{{{
+    "TERMINAL-----------------------------------------------------{{{2
         
-        " open new split panes to right and below
+    " open new split panes to right and below
     set splitright
     set splitbelow
     " turn terminal to normal mode with escape
@@ -109,8 +119,7 @@ nmap <F3> :nohlsearch<CR>
     endfunction
     nnoremap <c-n> :call OpenTerminal()<CR>
 
-    "}}}
-    "FERN---------------------------------------------------------{{{
+    "FERN---------------------------------------------------------{{{2
 
     let g:fern#disable_default_mappings = 1
     noremap <F2> <Esc>:Fern . -drawer -reveal=% -toggle -width=30<CR><C-w>=
@@ -166,3 +175,5 @@ function! s:hijack_directory() abort
   execute printf('Fern %s', fnameescape(path))
 endfunction
 
+
+source $HOME/.config/nvim/plug-config/coc.vim

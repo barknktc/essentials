@@ -39,7 +39,7 @@ export HISTCONTROL=ignoredups:erasedups
     alias pacmaq="pacman -Qeq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
 
     # general adjustments------------------------------------------{{{2
-    alias ping="ping -c 5"
+    #alias ping="ping -c 5"
     alias vim="nvim"
 
     # }}}

@@ -69,6 +69,6 @@ eval "$(starship init bash)"
 neofetch
 
 # Oto SSH key 
-#keychain --nogui --quiet $HOME/.ssh/id_rsa
-#source $HOME/.keychain/RapsoravidesS-sh
+keychain --nogui --quiet $HOME/.ssh/id_rsa
+source $HOME/.keychain/RapsoravidesS-sh
 

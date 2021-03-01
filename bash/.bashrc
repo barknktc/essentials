@@ -1,16 +1,23 @@
 # ~/.bashrc
 # vim:foldmethod=marker
 # If not running interactively, don't do anything
-[[ $- != *i* ]] && return
 
 #------------------------------SUPERIOR BASHRC---------------------------------
 
-PS1='[\u \W]\$ '
+
+
+
+[[ $- != *i* ]] && return   # If non interactive; exit 
+PS1='[\u \W]\$ '    # Main dialog infos
+
 
 # ENVORIMENT VARIABLELARI------------------------------------------{{{1
 export TERM="kitty"            
 export EDITOR="nvim"      
 export HISTCONTROL=ignoredups:erasedups 
+export MANPAGER="nvim -c 'set ft=man' -"
+export MANWIDTH=80
+export PATH=$PATH:/home/barkn/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin
 
 # ALIASES----------------------------------------------------------{{{1
 
@@ -50,14 +57,9 @@ shopt -s autocd
 
 # EKLENTILER-------------------------------------------------------{{{1
 
-#Powerline
-function _update_ps1() {
-    PS1=$(powerline-shell $?)
-}
+#Starship Prompt
+eval "$(starship init bash)"
 
-if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
-    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-fi
 
 #Bash Completion
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
@@ -67,6 +69,6 @@ fi
 neofetch
 
 # Oto SSH key 
-keychain --nogui --quiet $HOME/.ssh/id_rsa
-source $HOME/.keychain/RapsoravidesS-sh
+#keychain --nogui --quiet $HOME/.ssh/id_rsa
+#source $HOME/.keychain/RapsoravidesS-sh
 

@@ -7,6 +7,7 @@
 filetype plugin indent on
 
 " PLUGINS----------------------------------------------------------{{{1
+
 call plug#begin('~/local/share/nvim/plugged')
 
 Plug 'morhetz/gruvbox' "color theme
@@ -36,6 +37,7 @@ Plug 'tpope/vim-surround'
 
 call plug#end()
 
+
     " PLUGIN CONFIG------------------------------------------------{{{
 
     colorscheme gruvbox                 "Setting the colorscheme
@@ -48,6 +50,7 @@ call plug#end()
     endif
 
     command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
 
     "}}}
 
@@ -73,10 +76,12 @@ set foldcolumn=1            "The with of the left column about folds
 set cursorline              "Highlighting the line with the cursor
 set lazyredraw              "Dont show keymap action until it finishes
 
+
 " COMPLETION-------------------------------------------------------{{{1
 
 set wildmode=longest,list   "Show possible completions on command line
 set clipboard+=unnamedplus
+
 
 " BACKUPS----------------------------------------------------------{{{1
 
@@ -85,11 +90,13 @@ set hidden                  "Don't prompt to save hidden windows until exit
 set nobackup
 set nowritebackup
 
+
 " KEY MAPPINGS-----------------------------------------------------{{{1
 
 let mapleader=" "
 
 nmap <F3> :nohlsearch<CR>
+
 
     "NAVIGATE-----------------------------------------------------{{{2
     
@@ -102,6 +109,7 @@ nmap <F3> :nohlsearch<CR>
     nnoremap <C-j> <C-w>j
     nnoremap <C-k> <C-w>k
     nnoremap <C-l> <C-w>l
+
 
     "TERMINAL-----------------------------------------------------{{{2
         
@@ -118,6 +126,7 @@ nmap <F3> :nohlsearch<CR>
       resize 10
     endfunction
     nnoremap <c-n> :call OpenTerminal()<CR>
+
 
     "FERN---------------------------------------------------------{{{2
 
@@ -145,6 +154,7 @@ nmap <F3> :nohlsearch<CR>
       autocmd!
       autocmd FileType fern call FernInit()
     augroup END
+
 
     "}}}
 
